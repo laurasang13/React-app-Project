@@ -1,0 +1,43 @@
+.colorMood-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    min-height: 100vh;
+    background-color: #f9f9fb;;
+    
+}
+
+.notFoundMood {
+    font-size: 18px;
+    color: rgb(108, 83, 140);
+}
+
+.colorMood-card {
+  background-color: white;
+  padding: 40px;
+  border-radius: 20px;
+  max-width: 500px;
+  width: 100%;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+h1 {
+    font-size: 32px;
+    color: rgb(82, 77, 88);
+    margin-bottom: 10px;
+}
+
+h3 {
+    font-size: 24px;
+    color: rgb(82, 77, 88);
+    margin-top: 15px;
+}
+
+p {
+    font-size: 16px;
+    color: rgb(82, 77, 88);
+    margin-top: 15px;
+}

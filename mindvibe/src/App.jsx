@@ -2,7 +2,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage/HomePage";
 import FeelingPage from "./pages/FeelingsPage/FeelingPage";
 import Navbar from "./components/Navbar/Navbar";
-//import logo from "../public//icons/logo.png";
+import MoodDetailPage from "./pages/MoodDetailPage/MoodDetailPage";
+
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/feelings" element={<FeelingPage />} />
         <Route path="/HomePage" element={<HomePage />} />
+        <Route path="/mood/:slug" element={<MoodDetailPage />} />
       </Routes>
     </BrowserRouter>
   );
