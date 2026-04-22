@@ -4,7 +4,6 @@ import FeelingPage from "./pages/FeelingsPage/FeelingPage";
 import Navbar from "./components/Navbar/Navbar";
 import MoodDetailPage from "./pages/MoodDetailPage/MoodDetailPage";
 
-
 function App() {
   return (
     <BrowserRouter>

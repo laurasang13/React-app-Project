@@ -1,12 +1,18 @@
 import { useParams } from "react-router-dom"
 import { moods } from "../components/Moods"
-//import MoodDetailPage from "../pages/MoodDetailPage/MoodDetailPage"
+import { useEffect, useState } from "react"
+import { analyzeMood } from "../context/useFetch"
 
 
 export function useMoodDetail() {
-  
+
+  //Busqueda de mood por slug
   const { slug } = useParams()
   const moodInfo = moods.find(m => m.id === Number(slug))
+
+  // Estado de la API
+  const [aiData, setAiData] = useState(null)
+  const [loading, setLoading] = useState(true)
 
   const moodData = {
     1: {
@@ -85,13 +91,56 @@ export function useMoodDetail() {
     }, 
   }
 
-   const moodDetail = moodData[moodInfo?.id]
-   const mood = moodInfo && moodDetail
-    ? { ...moodInfo, ...moodDetail }
+  //Llamamos a la API
+  useEffect(() => {
+  async function fetchMood() {
+      if (!moodInfo) {setLoading(false)
+        return
+      }
+      
+      setLoading(true)
+
+      const result = await analyzeMood(moodInfo.name)
+
+      if (result) {
+        setAiData(result)
+      }
+
+      setLoading(false)
+    }
+
+    fetchMood()
+  }, [moodInfo])
+
+  // 🔁 fallback
+  const fallback = moodData[moodInfo?.id]
+
+  // 🧩 combinación final
+  const mood = moodInfo
+    ? {
+        ...moodInfo,
+        description: aiData?.description || fallback?.description,
+        recommendations: aiData?.recommendations || fallback?.recommendations,
+        color: aiData?.color || moodInfo.color,
+        quote: aiData?.quote || "Confía en tu proceso."
+      }
     : null
 
-  
   return {
-    mood
+    mood,
+    loading
   }
 }
+  
+
+
+   //const moodDetail = moodData[moodInfo?.id]
+   //const mood = moodInfo && moodDetail
+   // ? { ...moodInfo, ...moodDetail }
+   // : null
+
+  
+  //return {
+    //mood
+  //}
+//}
